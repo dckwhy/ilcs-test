@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 interface Props {
   children: ReactNode;
@@ -6,7 +7,12 @@ interface Props {
 
 const Layout = (props: Readonly<Props>) => {
   const { children } = props;
-  return <Navbar />;
+  return (
+    <div>
+      <Navbar />
+      <Footer />
+    </div>
+  );
 };
 
 export default Layout;
