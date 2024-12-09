@@ -10,6 +10,12 @@ const Layout = (props: Readonly<Props>) => {
   return (
     <div>
       <Navbar />
+      <div
+        className="container mx-auto grow p-4 flex flex-col bg-[#D2D3D4]"
+        data-testid="content-container"
+      >
+        {children}
+      </div>
       <Footer />
     </div>
   );
