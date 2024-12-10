@@ -20,7 +20,20 @@ import {
 } from "@/utils/constant";
 
 const FormSchema = z.object({
-  nomor_pengajuan: z.string(),
+  ur_entitas_pemberitahu: z.string(),
+  ur_jenis_identitas: z.string().optional(),
+  nib: z.string(),
+  nomor_identitas: z.string(),
+  nomor_identitas_16: z.string().optional(),
+  nama_identitas: z.string(),
+  provinsi_identitas: z.string(),
+  kota_identitas: z.string(),
+  kecamatan: z.string(),
+  kode_pos: z.string(),
+  rt_rw: z.string(),
+  tlp_identitas: z.string(),
+  email_identitas: z.string(),
+  status: z.string(),
 });
 
 import { Search } from "lucide-react";
