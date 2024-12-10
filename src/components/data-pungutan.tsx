@@ -85,55 +85,75 @@ const DataPungutan = () => {
           new Intl.NumberFormat("en-US", {
             minimumFractionDigits: 4,
             maximumFractionDigits: 4,
-          }).format(dataPungutan.nilai_kurs) || "",
+          })
+            .format(dataPungutan.nilai_kurs)
+            .toString() || "",
         nilai_incoterm:
           new Intl.NumberFormat("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          }).format(dataPungutan.nilai_incoterm) || "",
+          })
+            .format(dataPungutan.nilai_incoterm)
+            .toString() || "",
         biaya_tambahan:
           new Intl.NumberFormat("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          }).format(dataPungutan.biaya_tambahan) || "",
+          })
+            .format(dataPungutan.biaya_tambahan)
+            .toString() || "",
         biaya_pengurang:
           new Intl.NumberFormat("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          }).format(dataPungutan.biaya_pengurang) || "",
+          })
+            .format(dataPungutan.biaya_pengurang)
+            .toString() || "",
         tarif_vd:
           new Intl.NumberFormat("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          }).format(dataPungutan.tarif_vd) || "",
+          })
+            .format(dataPungutan.tarif_vd)
+            .toString() || "",
         fob:
           new Intl.NumberFormat("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          }).format(dataPungutan.fob) || "",
+          })
+            .format(dataPungutan.fob)
+            .toString() || "",
         ur_asuransi: dataPungutan.ur_asuransi || "",
         nilai_asuransi:
           new Intl.NumberFormat("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          }).format(dataPungutan.nilai_asuransi) || "",
+          })
+            .format(dataPungutan.nilai_asuransi)
+            .toString() || "",
         freight:
           new Intl.NumberFormat("en-US", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          }).format(dataPungutan.freight) || "",
+          })
+            .format(dataPungutan.freight)
+            .toString() || "",
         nilai_pabean:
-          new Intl.NumberFormat("en-US").format(dataPungutan.nilai_pabean) ||
-          "",
+          new Intl.NumberFormat("en-US")
+            .format(dataPungutan.nilai_pabean)
+            .toString() || "",
         nilai_pabean_idr:
-          new Intl.NumberFormat("en-US").format(
-            dataPungutan.nilai_pabean_idr
-          ) || "",
+          new Intl.NumberFormat("en-US")
+            .format(dataPungutan.nilai_pabean_idr)
+            .toString() || "",
         berat_kotor:
-          new Intl.NumberFormat("en-US").format(dataPungutan.berat_kotor) || "",
+          new Intl.NumberFormat("en-US")
+            .format(dataPungutan.berat_kotor)
+            .toString() || "",
         berat_bersih:
-          new Intl.NumberFormat("en-US").format(dataPungutan.berat_bersih) ||
-          "",
+          new Intl.NumberFormat("en-US")
+            .format(dataPungutan.berat_bersih)
+            .toString() || "",
         ur_flag_curah: dataPungutan.ur_flag_curah || "",
       });
     }
