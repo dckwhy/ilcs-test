@@ -163,6 +163,7 @@ const DataEntitas = () => {
             control={form.control}
             name="nib"
             label="NIB"
+            disabled={false}
             isRequired={true}
           >
             {(field) => (
@@ -173,6 +174,7 @@ const DataEntitas = () => {
             control={form.control}
             name="nomor_identitas"
             label="No Idedntitas"
+            disabled={false}
             isRequired={true}
           >
             {(field) => (
@@ -228,6 +230,7 @@ const DataEntitas = () => {
             control={form.control}
             name="kota_identitas"
             label="Kota / Kabupaten"
+            disabled={false}
             isRequired={true}
           >
             {(field) => (
