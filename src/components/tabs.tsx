@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Button } from "./ui/button";
 import DataUtama from "./data-utama";
@@ -9,14 +9,7 @@ const TabsWithForm = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const tabs = ["Data Utama", "Data Entitas", "Data Pungutan"];
-  const tabContent = [
-    <DataUtama onNext={() => setActiveTab(1)} />,
-    <DataEntitas
-      onNext={() => setActiveTab(2)}
-      onPrev={() => setActiveTab(0)}
-    />,
-    <DataPungutan onPrev={() => setActiveTab(1)} />,
-  ];
+  const tabContent = [<DataUtama />, <DataEntitas />, <DataPungutan />];
 
   return (
     <div className="w-full mx-auto">

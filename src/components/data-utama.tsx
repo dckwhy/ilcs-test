@@ -99,6 +99,7 @@ const DataUtama = () => {
               control={form.control}
               name="nomor_pengajuan"
               label="Nomor Pengajuan"
+              isRequired={false}
             >
               {(field) => (
                 <Input
@@ -113,6 +114,7 @@ const DataUtama = () => {
               control={form.control}
               name="tanggal_pengajuan"
               label="Tanggal Pengajuan"
+              isRequired={false}
             >
               {(field) => (
                 <Input
@@ -128,6 +130,7 @@ const DataUtama = () => {
               placeholder="Nomor Pendaftaran"
               name="nomor_pendaftaran"
               label="Nomor Pendaftaran"
+              isRequired={false}
             >
               {(field) => (
                 <Input
@@ -143,6 +146,7 @@ const DataUtama = () => {
               placeholder="Tanggal Pendaftaran"
               name="tanggal_pendaftaran"
               label="Tanggal Pendaftaran"
+              isRequired={false}
             >
               {(field) => (
                 <Input
@@ -160,12 +164,15 @@ const DataUtama = () => {
               name="ur_pabean_asal"
               label="Kantor Pabean"
               options={pabean}
+              disabled={false}
+              isRequired={false}
             />
             <CustomFormSelect
               control={form.control}
               name="kd_skep_fasilitas"
               label="SKEP Fasilitas"
               disabled={true}
+              isRequired={false}
             />
             <CustomFormSelect
               control={form.control}

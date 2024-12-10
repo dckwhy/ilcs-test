@@ -216,6 +216,7 @@ const DataPungutan = () => {
             control={form.control}
             name="biaya_tambahan"
             label="Biaya Tambahan"
+            isRequired={false}
           >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
@@ -226,6 +227,7 @@ const DataPungutan = () => {
             control={form.control}
             name="biaya_pengurang"
             label="Biaya Pengurang"
+            isRequired={false}
           >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
@@ -236,11 +238,17 @@ const DataPungutan = () => {
             control={form.control}
             name="tarif_vd"
             label="Voluntary Declaration"
+            isRequired={false}
           >
             {(field) => <Input {...field} value={field.value as string} />}
           </CustomFormField>
           <p className="mt-6">=</p>
-          <CustomFormField control={form.control} name="fob" label="Nilai FOB">
+          <CustomFormField
+            control={form.control}
+            name="fob"
+            label="Nilai FOB"
+            isRequired={false}
+          >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
             )}
@@ -252,12 +260,14 @@ const DataPungutan = () => {
             name="ur_asuransi"
             label="Asuransi Bayar di"
             options={opt_asuransi}
+            isRequired={false}
             disabled={true}
           />
           <CustomFormField
             control={form.control}
             name="nilai_asuransi"
             label="Asuransi"
+            isRequired={false}
           >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
@@ -267,6 +277,7 @@ const DataPungutan = () => {
             control={form.control}
             name="freight"
             label="Freight"
+            isRequired={false}
           >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
@@ -278,6 +289,7 @@ const DataPungutan = () => {
             control={form.control}
             name="nilai_pabean"
             label="CIF"
+            isRequired={false}
           >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
@@ -287,6 +299,7 @@ const DataPungutan = () => {
             control={form.control}
             name="nilai_pabean_idr"
             label="CIF Rp"
+            isRequired={false}
           >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
@@ -296,6 +309,7 @@ const DataPungutan = () => {
             control={form.control}
             name="berat_kotor"
             label="Bruto"
+            isRequired={false}
           >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
@@ -305,6 +319,7 @@ const DataPungutan = () => {
             control={form.control}
             name="berat_bersih"
             label="Netto"
+            isRequired={false}
           >
             {(field) => (
               <Input {...field} value={field.value as string} disabled />
