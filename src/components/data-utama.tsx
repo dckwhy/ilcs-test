@@ -36,7 +36,7 @@ const DataUtama = () => {
   const [params] = useState({
     nomor_pengajuan: "20120B388FAE20240402000001",
   });
-  const [dataUtama, setDataUtama] = useState<IDataUtama[]>([]);
+  const [dataUtama, setDataUtama] = useState<IDataUtama>();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),

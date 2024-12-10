@@ -49,7 +49,7 @@ const DataPungutan = () => {
 
   const [loading, setLoading] = useState([]);
 
-  const [dataPungutan, setDataPungutan] = useState<IPungutan[]>([]);
+  const [dataPungutan, setDataPungutan] = useState<IPungutan>();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),

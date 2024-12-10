@@ -45,7 +45,7 @@ const DataEntitas = () => {
 
   const [loading, setLoading] = useState([]);
 
-  const [dataEntitas, setDataEntitas] = useState<IEntitas[]>([]);
+  const [dataEntitas, setDataEntitas] = useState<IEntitas>();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
