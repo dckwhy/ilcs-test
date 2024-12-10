@@ -39,7 +39,7 @@ interface Props<T extends FieldValues> {
   description?: string;
   control: Control<T>;
   disabled: boolean;
-  isRequired: false;
+  isRequired: boolean;
 }
 
 interface ChildrenProps<T extends FieldValues> extends Props<T> {
