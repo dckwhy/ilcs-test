@@ -36,6 +36,7 @@ const Navbar = () => {
     month: "long",
     day: "numeric",
   };
+
   return (
     <div>
       <nav className="bg-[#102D61] sticky top-0 text-white">
@@ -53,12 +54,12 @@ const Navbar = () => {
                 </a>
               </div>
             </div>
-            <div className="aflex flex-1 items-center">
+            <div className="flex flex-1 items-center justify-end">
               <div className="flex flex-shrink-0 items-center justify-end space-x-4">
                 <p className="text-xs">
                   {today.toLocaleDateString("id-ID", options) +
                     ` - ` +
-                    today.toLocaleTimeString()}
+                    today.toLocaleTimeString("id-ID")}
                 </p>
                 <div className="relative">
                   <BellIcon className="w-[1rem] h-[1rem]" />

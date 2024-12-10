@@ -72,13 +72,13 @@ const DataPungutan = () => {
     },
   });
 
-  const formatCurrency = (value: string): string => {
+  const formatCurrency = (value: string, digit: number): string => {
     const numberValue = parseFloat(value);
     if (isNaN(numberValue)) return value;
 
-    return new Intl.NumberFormat("id-ID", {
-      minimumFractionDigits: 3,
-      maximumFractionDigits: 3,
+    return new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: digit,
+      maximumFractionDigits: digit,
     }).format(numberValue);
   };
 
@@ -91,32 +91,45 @@ const DataPungutan = () => {
       form.reset({
         ur_incoterm: dataPungutan.ur_incoterm || "",
         ur_valuta: dataPungutan.ur_valuta || "",
-        nilai_kurs: formatCurrency(dataPungutan.nilai_kurs?.toString() || ""),
+        nilai_kurs: formatCurrency(
+          dataPungutan.nilai_kurs?.toString() || "",
+          4
+        ),
         nilai_incoterm: formatCurrency(
-          dataPungutan.nilai_incoterm?.toString() || ""
+          dataPungutan.nilai_incoterm?.toString() || "",
+          2
         ),
         biaya_tambahan: formatCurrency(
-          dataPungutan.biaya_tambahan?.toString() || ""
+          dataPungutan.biaya_tambahan?.toString() || "",
+          2
         ),
         biaya_pengurang: formatCurrency(
-          dataPungutan.biaya_pengurang?.toString() || ""
+          dataPungutan.biaya_pengurang?.toString() || "",
+          2
         ),
-        tarif_vd: formatCurrency(dataPungutan.tarif_vd?.toString() || ""),
-        fob: formatCurrency(dataPungutan.fob?.toString() || ""),
+        tarif_vd: formatCurrency(dataPungutan.tarif_vd?.toString() || "", 2),
+        fob: formatCurrency(dataPungutan.fob?.toString() || "", 2),
         ur_asuransi: dataPungutan.ur_asuransi || "",
         nilai_asuransi: formatCurrency(
-          dataPungutan.nilai_asuransi?.toString() || ""
+          dataPungutan.nilai_asuransi?.toString() || "",
+          2
         ),
-        freight: formatCurrency(dataPungutan.freight?.toString() || ""),
+        freight: formatCurrency(dataPungutan.freight?.toString() || "", 2),
         nilai_pabean: formatCurrency(
-          dataPungutan.nilai_pabean?.toString() || ""
+          dataPungutan.nilai_pabean?.toString() || "",
+          0
         ),
         nilai_pabean_idr: formatCurrency(
-          dataPungutan.nilai_pabean_idr?.toString() || ""
+          dataPungutan.nilai_pabean_idr?.toString() || "",
+          0
         ),
-        berat_kotor: formatCurrency(dataPungutan.berat_kotor?.toString() || ""),
+        berat_kotor: formatCurrency(
+          dataPungutan.berat_kotor?.toString() || "",
+          0
+        ),
         berat_bersih: formatCurrency(
-          dataPungutan.berat_bersih?.toString() || ""
+          dataPungutan.berat_bersih?.toString() || "",
+          0
         ),
         ur_flag_curah: dataPungutan.ur_flag_curah || "",
       });
