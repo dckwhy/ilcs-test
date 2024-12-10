@@ -21,6 +21,15 @@ import {
 
 const FormSchema = z.object({
   nomor_pengajuan: z.string(),
+  tanggal_pengajuan: z.string(),
+  nomor_pendaftaran: z.string().optional(),
+  tanggal_pendaftaran: z.string().optional(),
+  ur_pabean_asal: z.string(),
+  skep_fasilitas: z.string(),
+  ur_jenis_pib: z.string(),
+  ur_jenis_impor: z.string(),
+  ur_cara_bayar: z.string(),
+  ur_transaksi_impor: z.string(),
 });
 
 const DataUtama = () => {

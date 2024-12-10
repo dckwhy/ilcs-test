@@ -24,6 +24,22 @@ import { RefreshCcw } from "lucide-react";
 
 const FormSchema = z.object({
   nomor_pengajuan: z.string(),
+  ur_incoterm: z.string(),
+  ur_valuta: z.string(),
+  nilai_kurs: z.string(),
+  nilai_incoterm: z.string(),
+  biaya_tambahan: z.string(),
+  biaya_pengurang: z.string(),
+  tarif_vd: z.string(),
+  fob: z.string(),
+  ur_asuransi: z.string(),
+  nilai_asuransi: z.string(),
+  freight: z.string(),
+  nilai_pabean: z.string(),
+  nilai_pabean_idr: z.string(),
+  berat_kotor: z.string(),
+  berat_bersih: z.string(),
+  ur_flag_curah: z.string(),
 });
 
 const DataPungutan = () => {
