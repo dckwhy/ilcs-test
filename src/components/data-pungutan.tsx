@@ -72,6 +72,16 @@ const DataPungutan = () => {
     },
   });
 
+  const formatCurrency = (value: string): string => {
+    const numberValue = parseFloat(value);
+    if (isNaN(numberValue)) return value;
+
+    return new Intl.NumberFormat("id-ID", {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+    }).format(numberValue);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -81,79 +91,33 @@ const DataPungutan = () => {
       form.reset({
         ur_incoterm: dataPungutan.ur_incoterm || "",
         ur_valuta: dataPungutan.ur_valuta || "",
-        nilai_kurs:
-          new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 4,
-            maximumFractionDigits: 4,
-          })
-            .format(dataPungutan.nilai_kurs)
-            .toString() || "",
-        nilai_incoterm:
-          new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-            .format(dataPungutan.nilai_incoterm)
-            .toString() || "",
-        biaya_tambahan:
-          new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-            .format(dataPungutan.biaya_tambahan)
-            .toString() || "",
-        biaya_pengurang:
-          new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-            .format(dataPungutan.biaya_pengurang)
-            .toString() || "",
-        tarif_vd:
-          new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-            .format(dataPungutan.tarif_vd)
-            .toString() || "",
-        fob:
-          new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-            .format(dataPungutan.fob)
-            .toString() || "",
+        nilai_kurs: formatCurrency(dataPungutan.nilai_kurs?.toString() || ""),
+        nilai_incoterm: formatCurrency(
+          dataPungutan.nilai_incoterm?.toString() || ""
+        ),
+        biaya_tambahan: formatCurrency(
+          dataPungutan.biaya_tambahan?.toString() || ""
+        ),
+        biaya_pengurang: formatCurrency(
+          dataPungutan.biaya_pengurang?.toString() || ""
+        ),
+        tarif_vd: formatCurrency(dataPungutan.tarif_vd?.toString() || ""),
+        fob: formatCurrency(dataPungutan.fob?.toString() || ""),
         ur_asuransi: dataPungutan.ur_asuransi || "",
-        nilai_asuransi:
-          new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-            .format(dataPungutan.nilai_asuransi)
-            .toString() || "",
-        freight:
-          new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-            .format(dataPungutan.freight)
-            .toString() || "",
-        nilai_pabean:
-          new Intl.NumberFormat("en-US")
-            .format(dataPungutan.nilai_pabean)
-            .toString() || "",
-        nilai_pabean_idr:
-          new Intl.NumberFormat("en-US")
-            .format(dataPungutan.nilai_pabean_idr)
-            .toString() || "",
-        berat_kotor:
-          new Intl.NumberFormat("en-US")
-            .format(dataPungutan.berat_kotor)
-            .toString() || "",
-        berat_bersih:
-          new Intl.NumberFormat("en-US")
-            .format(dataPungutan.berat_bersih)
-            .toString() || "",
+        nilai_asuransi: formatCurrency(
+          dataPungutan.nilai_asuransi?.toString() || ""
+        ),
+        freight: formatCurrency(dataPungutan.freight?.toString() || ""),
+        nilai_pabean: formatCurrency(
+          dataPungutan.nilai_pabean?.toString() || ""
+        ),
+        nilai_pabean_idr: formatCurrency(
+          dataPungutan.nilai_pabean_idr?.toString() || ""
+        ),
+        berat_kotor: formatCurrency(dataPungutan.berat_kotor?.toString() || ""),
+        berat_bersih: formatCurrency(
+          dataPungutan.berat_bersih?.toString() || ""
+        ),
         ur_flag_curah: dataPungutan.ur_flag_curah || "",
       });
     }
