@@ -43,7 +43,7 @@ const DataEntitas = () => {
     id_aju: "04eb6a72-bb63-5aed-5e92-f58a3bfd5da2",
   });
 
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [dataEntitas, setDataEntitas] = useState<IEntitas>();
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -74,7 +74,7 @@ const DataEntitas = () => {
     if (!loading && dataEntitas) {
       form.reset({
         ur_entitas_pemberitahu: dataEntitas.ur_entitas_pemberitahu || "",
-        ur_jenis_identitas: dataEntitas.pengusaha.ur_jenis_kegiatan || "",
+        ur_jenis_identitas: dataEntitas.pengusaha.ur_jenis_identitas || "",
         nib: dataEntitas.pengusaha.nib || "",
         nomor_identitas: dataEntitas.pengusaha.nomor_identitas || "",
         nomor_identitas_16: dataEntitas.pengusaha.nomor_identitas_16 || "",

@@ -6,8 +6,8 @@ export interface IDataUtama {
   tanggal_pendaftaran: string | null;
   ur_pabean_asal: string;
   kd_skep_fasilitas: string;
-  jenis_pib: string;
-  kd_jenis_impor: string;
+  ur_jenis_pib: string;
+  ur_jenis_impor: string;
   ur_cara_bayar: string;
   ur_transaksi_impor: string;
 }

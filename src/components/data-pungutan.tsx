@@ -23,7 +23,6 @@ import { Button } from "@/components/ui/button";
 import { RefreshCcw } from "lucide-react";
 
 const FormSchema = z.object({
-  nomor_pengajuan: z.string(),
   ur_incoterm: z.string(),
   ur_valuta: z.string(),
   nilai_kurs: z.string(),
@@ -47,7 +46,7 @@ const DataPungutan = () => {
     id_aju: "04eb6a72-bb63-5aed-5e92-f58a3bfd5da2",
   });
 
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [dataPungutan, setDataPungutan] = useState<IPungutan>();
 
