@@ -30,12 +30,31 @@ import {
 
 const Navbar = () => {
   const today = new Date();
-  const options = (Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+
+  const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  const months = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+
+  // Ambil bagian tanggal secara manual
+  const dayName = days[today.getDay()]; // Nama hari
+  const day = today.getDate(); // Tanggal
+  const month = months[today.getMonth()]; // Nama bulan
+  const year = today.getFullYear(); // Tahun
+  const hours = String(today.getHours()).padStart(2, "0"); // Jam
+  const minutes = String(today.getMinutes()).padStart(2, "0"); // Menit
+  const seconds = String(today.getSeconds()).padStart(2, "0"); // Detik
 
   return (
     <div>
@@ -57,9 +76,7 @@ const Navbar = () => {
             <div className="flex flex-1 items-center justify-end">
               <div className="flex flex-shrink-0 items-center justify-end space-x-4">
                 <p className="text-xs">
-                  {today.toLocaleDateString("id-ID", options) +
-                    ` - ` +
-                    today.toLocaleTimeString("id-ID")}
+                  {`${dayName}, ${day} ${month} ${year} - ${hours}:${minutes}:${seconds}`}
                 </p>
                 <div className="relative">
                   <BellIcon className="w-[1rem] h-[1rem]" />

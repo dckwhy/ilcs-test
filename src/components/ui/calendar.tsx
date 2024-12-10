@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, NavButtonProps } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -54,7 +54,7 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        NavButton: ({ isPrevious }) => (
+        NavButton: ({ isPrevious }: NavButtonProps) => (
           <button
             className={cn(
               buttonVariants({ variant: "outline" }),
