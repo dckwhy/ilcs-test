@@ -99,6 +99,7 @@ const DataUtama = () => {
               control={form.control}
               name="nomor_pengajuan"
               label="Nomor Pengajuan"
+              disabled={true}
               isRequired={false}
             >
               {(field) => (
@@ -114,6 +115,7 @@ const DataUtama = () => {
               control={form.control}
               name="tanggal_pengajuan"
               label="Tanggal Pengajuan"
+              disabled={true}
               isRequired={false}
             >
               {(field) => (
@@ -130,6 +132,7 @@ const DataUtama = () => {
               placeholder="Nomor Pendaftaran"
               name="nomor_pendaftaran"
               label="Nomor Pendaftaran"
+              disabled={true}
               isRequired={false}
             >
               {(field) => (
@@ -146,6 +149,7 @@ const DataUtama = () => {
               placeholder="Tanggal Pendaftaran"
               name="tanggal_pendaftaran"
               label="Tanggal Pendaftaran"
+              disabled={true}
               isRequired={false}
             >
               {(field) => (

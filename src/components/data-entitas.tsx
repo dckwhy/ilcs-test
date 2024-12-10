@@ -163,6 +163,7 @@ const DataEntitas = () => {
             control={form.control}
             name="nib"
             label="NIB"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
@@ -173,6 +174,7 @@ const DataEntitas = () => {
             control={form.control}
             name="nomor_identitas"
             label="No Idedntitas"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
@@ -199,6 +201,7 @@ const DataEntitas = () => {
             control={form.control}
             name="nomor_identitas_16"
             label="No Identitas(16 digit)"
+            disabled={true}
             isRequired={false}
           >
             {(field) => (
@@ -209,6 +212,7 @@ const DataEntitas = () => {
             control={form.control}
             name="nama_identitas"
             label="Nama Perusahaan"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
@@ -229,6 +233,7 @@ const DataEntitas = () => {
             control={form.control}
             name="kota_identitas"
             label="Kota / Kabupaten"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
@@ -239,6 +244,7 @@ const DataEntitas = () => {
             control={form.control}
             name="kecamatan"
             label="Kecamatan"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
@@ -249,6 +255,7 @@ const DataEntitas = () => {
             control={form.control}
             name="kode_pos"
             label="Kode Pos"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
@@ -259,6 +266,7 @@ const DataEntitas = () => {
             control={form.control}
             name="rt_rw"
             label="RT / RW"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
@@ -271,6 +279,7 @@ const DataEntitas = () => {
             control={form.control}
             name="tlp_identitas"
             label="Telepon"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
@@ -281,6 +290,7 @@ const DataEntitas = () => {
             control={form.control}
             name="email_identitas"
             label="Email"
+            disabled={true}
             isRequired={true}
           >
             {(field) => (
