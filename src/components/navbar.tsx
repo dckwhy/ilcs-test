@@ -30,12 +30,12 @@ import {
 
 const Navbar = () => {
   const today = new Date();
-  const options = {
+  const options = (Intl.DateTimeFormatOptions = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
-  };
+  });
 
   return (
     <div>
