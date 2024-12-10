@@ -1,25 +1,22 @@
-"use client";
-
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { IPungutan, getDataPungutan } from "@/utils/apis/pungutan";
 
+import { Form } from "@/components/ui/form";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
+  CustomFormField,
+  CustomFormSelect,
+} from "@/components/ui/custom-formfield";
 import { Input } from "@/components/ui/input";
 
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  opt_asuransi,
+  opt_incoterms,
+  opt_valuta,
+  opt_kontainer,
+} from "@/utils/constant";
 
 import { Button } from "@/components/ui/button";
 
@@ -30,279 +27,297 @@ const FormSchema = z.object({
 });
 
 const DataPungutan = () => {
+  const [params] = useState({
+    id_aju: "04eb6a72-bb63-5aed-5e92-f58a3bfd5da2",
+  });
+
+  const [loading, setLoading] = useState([]);
+
+  const [dataPungutan, setDataPungutan] = useState<IPungutan[]>([]);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      nomor_pengajuan: "",
+      ur_incoterm: "",
+      ur_valuta: "",
+      nilai_kurs: "",
+      nilai_incoterm: "",
+      biaya_tambahan: "",
+      biaya_pengurang: "",
+      tarif_vd: "",
+      fob: "",
+      ur_asuransi: "",
+      nilai_asuransi: "",
+      freight: "",
+      nilai_pabean: "",
+      nilai_pabean_idr: "",
+      berat_kotor: "",
+      berat_bersih: "",
+      ur_flag_curah: "",
     },
   });
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (!loading && dataPungutan) {
+      form.reset({
+        ur_incoterm: dataPungutan.ur_incoterm || "",
+        ur_valuta: dataPungutan.ur_valuta || "",
+        nilai_kurs:
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 4,
+            maximumFractionDigits: 4,
+          }).format(dataPungutan.nilai_kurs) || "",
+        nilai_incoterm:
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(dataPungutan.nilai_incoterm) || "",
+        biaya_tambahan:
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(dataPungutan.biaya_tambahan) || "",
+        biaya_pengurang:
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(dataPungutan.biaya_pengurang) || "",
+        tarif_vd:
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(dataPungutan.tarif_vd) || "",
+        fob:
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(dataPungutan.fob) || "",
+        ur_asuransi: dataPungutan.ur_asuransi || "",
+        nilai_asuransi:
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(dataPungutan.nilai_asuransi) || "",
+        freight:
+          new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }).format(dataPungutan.freight) || "",
+        nilai_pabean:
+          new Intl.NumberFormat("en-US").format(dataPungutan.nilai_pabean) ||
+          "",
+        nilai_pabean_idr:
+          new Intl.NumberFormat("en-US").format(
+            dataPungutan.nilai_pabean_idr
+          ) || "",
+        berat_kotor:
+          new Intl.NumberFormat("en-US").format(dataPungutan.berat_kotor) || "",
+        berat_bersih:
+          new Intl.NumberFormat("en-US").format(dataPungutan.berat_bersih) ||
+          "",
+        ur_flag_curah: dataPungutan.ur_flag_curah || "",
+      });
+    }
+  }, [loading, dataPungutan]);
+
+  async function fetchData() {
+    setLoading(true);
+    const query: { [key: string]: string } = {};
+    for (const [key, value] of Object.entries(params)) {
+      query[key] = value;
+    }
+    try {
+      const result = await getDataPungutan(query);
+
+      setDataPungutan(result.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="text-center">
+        <div role="status">
+          <svg
+            aria-hidden="true"
+            className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor"
+            />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill"
+            />
+          </svg>
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Form {...form}>
       <form className="w-full space-y-6">
         <div className="flex space-x-4 items-center">
-          <FormField
+          <CustomFormSelect
             control={form.control}
-            name="incoterms"
-            render={({ field }) => (
-              <FormItem className="flex-1">
-                <FormLabel>
-                  Incoterms <span className="text-red-500">*</span>
-                </FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a verified email to display" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
+            name="ur_incoterm"
+            label="Incoterms"
+            options={opt_incoterms}
+            disabled={true}
+            isRequired={true}
           />
-          <FormField
+          <CustomFormSelect
             control={form.control}
-            name="valuta"
-            render={({ field }) => (
-              <FormItem className="flex-1">
-                <FormLabel>
-                  Valuta <span className="text-red-500">*</span>
-                </FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a verified email to display" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
+            name="ur_valuta"
+            label="Valuta"
+            options={opt_valuta}
+            disabled={true}
+            isRequired={true}
           />
-          <FormField
+          <CustomFormField
             control={form.control}
-            name="kurs"
-            render={() => (
-              <FormItem className="flex-1">
-                <FormLabel>
-                  Kurs <span className="text-red-500">*</span>
-                </FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            name="nilai_kurs"
+            label="Kurs"
+            isRequired={true}
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
+          </CustomFormField>
           <Button className="bg-[#102D61] hover:bg-[#14284f] mt-8">
             <RefreshCcw color="#FFFFFF" />
           </Button>
         </div>
         <div className="flex space-x-4 items-center">
-          <FormField
+          <CustomFormField
             control={form.control}
-            name="nilai"
-            render={() => (
-              <FormItem className="flex-1">
-                <FormLabel>
-                  Nilai <span className="text-red-500">*</span>
-                </FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            name="nilai_incoterm"
+            label="Nilai"
+            isRequired={true}
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
+          </CustomFormField>
           <p className="mt-6">+</p>
-          <FormField
+          <CustomFormField
             control={form.control}
             name="biaya_tambahan"
-            render={() => (
-              <FormItem className="flex-1">
-                <FormLabel>Biaya Tambahan</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            label="Biaya Tambahan"
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
+          </CustomFormField>
           <p className="mt-6">-</p>
-          <FormField
+          <CustomFormField
             control={form.control}
             name="biaya_pengurang"
-            render={() => (
-              <FormItem className="flex-1">
-                <FormLabel>Biaya Pengurang</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            label="Biaya Pengurang"
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
+          </CustomFormField>
           <p className="mt-6">+</p>
-          <FormField
+          <CustomFormField
             control={form.control}
-            name="voluntary_declaration"
-            render={() => (
-              <FormItem className="flex-1">
-                <FormLabel>Voluntary Declaration</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+            name="tarif_vd"
+            label="Voluntary Declaration"
+          >
+            {(field) => <Input {...field} value={field.value as string} />}
+          </CustomFormField>
           <p className="mt-6">=</p>
-          <FormField
-            control={form.control}
-            name="nilai_fob"
-            render={() => (
-              <FormItem className="flex-1">
-                <FormLabel>Nilai FOB</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+          <CustomFormField control={form.control} name="fob" label="Nilai FOB">
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
+          </CustomFormField>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          <FormField
+          <CustomFormSelect
             control={form.control}
-            name="bayar_di"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Asuransi Bayar di</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a verified email to display" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
+            name="ur_asuransi"
+            label="Asuransi Bayar di"
+            options={opt_asuransi}
+            disabled={true}
           />
-          <FormField
+          <CustomFormField
             control={form.control}
-            name="asuransi"
-            render={() => (
-              <FormItem>
-                <FormLabel>Asuransi</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            name="nilai_asuransi"
+            label="Asuransi"
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
-          <FormField
+          </CustomFormField>
+          <CustomFormField
             control={form.control}
             name="freight"
-            render={() => (
-              <FormItem>
-                <FormLabel>Freight</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            label="Freight"
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
+          </CustomFormField>
         </div>
         <div className="grid grid-cols-5 gap-4">
-          <FormField
+          <CustomFormField
             control={form.control}
-            name="cif"
-            render={() => (
-              <FormItem>
-                <FormLabel>CIF</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            name="nilai_pabean"
+            label="CIF"
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
-          <FormField
+          </CustomFormField>
+          <CustomFormField
             control={form.control}
-            name="cif_rp"
-            render={() => (
-              <FormItem>
-                <FormLabel>CIF Rp</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            name="nilai_pabean_idr"
+            label="CIF Rp"
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
-          <FormField
+          </CustomFormField>
+          <CustomFormField
             control={form.control}
-            name="bruto"
-            render={() => (
-              <FormItem>
-                <FormLabel>Bruto</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            name="berat_kotor"
+            label="Bruto"
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
-          <FormField
+          </CustomFormField>
+          <CustomFormField
             control={form.control}
-            name="Netto"
-            render={() => (
-              <FormItem>
-                <FormLabel>Netto</FormLabel>
-                <FormControl>
-                  <Input readOnly />
-                </FormControl>
-              </FormItem>
+            name="berat_bersih"
+            label="Netto"
+          >
+            {(field) => (
+              <Input {...field} value={field.value as string} disabled />
             )}
-          />
-          <FormField
+          </CustomFormField>
+          <CustomFormSelect
             control={form.control}
-            name="flag_kontainer"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Flag Kontainer <span className="text-red-500">*</span>
-                </FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a verified email to display" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
+            name="ur_flag_curah"
+            label="Flag Kontainer"
+            options={opt_kontainer}
+            disabled={true}
+            isRequired={true}
           />
         </div>
         <div className="flex justify-center mt-16 space-x-4">
